@@ -1,0 +1,19 @@
+package com.example.clinicaOdontologicaGM.service;
+
+import com.example.clinicaOdontologicaGM.dto.TurnoDTO;
+import com.example.clinicaOdontologicaGM.entity.Turno;
+import com.example.clinicaOdontologicaGM.exceptions.BadRequestException;
+import com.example.clinicaOdontologicaGM.exceptions.ResourceNotFoundException;
+
+import java.util.List;
+
+public interface ITurnoService {
+
+    void agregarTurno(Turno turno) throws ResourceNotFoundException, BadRequestException;
+    void modificarTurno(Turno turno) throws ResourceNotFoundException;
+    void eliminarTurno(Long id) throws ResourceNotFoundException;
+    TurnoDTO buscarTurno(Long id) throws ResourceNotFoundException;
+    List<TurnoDTO> listarTurnos();
+
+
+}
