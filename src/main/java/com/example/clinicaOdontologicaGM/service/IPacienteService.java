@@ -14,8 +14,8 @@ import java.util.Set;
 
 public interface IPacienteService {
 
-    void agregarPaciente(Paciente paciente) throws BadRequestException, MethodArgumentNotValidException;
-    void modificarPaciente(Paciente paciente) throws ResourceNotFoundException;
+    PacienteDTO agregarPaciente(Paciente paciente) throws BadRequestException, MethodArgumentNotValidException;
+    PacienteDTO modificarPaciente(Paciente paciente) throws ResourceNotFoundException;
     void eliminarPaciente(Long id) throws ResourceNotFoundException;
     PacienteDTO buscarPaciente(Long id) throws ResourceNotFoundException;
     Set<PacienteDTO> listarPacientes();

@@ -30,15 +30,23 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity<?> agregarPaciente(@Valid @RequestBody Paciente paciente) throws BadRequestException, MethodArgumentNotValidException {
-        pacienteService.agregarPaciente(paciente);
-        return ResponseEntity.ok("Paciente agregado Con Exito");
+    public ResponseEntity<PacienteDTO> agregarPaciente(@Valid @RequestBody Paciente paciente) throws BadRequestException, MethodArgumentNotValidException {
+        ResponseEntity<PacienteDTO> respuesta;
+        PacienteDTO pacienteDTO = pacienteService.agregarPaciente(paciente);
+        if(pacienteDTO!=null) respuesta = new ResponseEntity<>(pacienteDTO, null, HttpStatus.CREATED);
+        else respuesta = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        return respuesta;
     }
 
     @PutMapping
-    public ResponseEntity<?> modificarPaciente(@Valid @RequestBody Paciente paciente) throws ResourceNotFoundException {
-        pacienteService.modificarPaciente(paciente);
-        return ResponseEntity.ok("Paciente modificado Con Exito");
+    public ResponseEntity<PacienteDTO> modificarPaciente(@Valid @RequestBody Paciente paciente) throws ResourceNotFoundException {
+        ResponseEntity<PacienteDTO> respuesta;
+        PacienteDTO pacienteDTO = pacienteService.modificarPaciente(paciente);
+        if(pacienteDTO!=null) respuesta = new ResponseEntity<>(pacienteDTO, null, HttpStatus.CREATED);
+        else respuesta = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        return respuesta;
     }
 
     @DeleteMapping("/{id}")

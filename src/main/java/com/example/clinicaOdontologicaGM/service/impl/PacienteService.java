@@ -16,11 +16,13 @@ import com.example.clinicaOdontologicaGM.repository.IPacienteRepository;
 import com.example.clinicaOdontologicaGM.service.IPacienteService;
 import com.example.clinicaOdontologicaGM.utils.JsonPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.validation.Valid;
@@ -47,25 +49,42 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public void agregarPaciente(Paciente paciente) throws BadRequestException, MethodArgumentNotValidException {
+    public PacienteDTO agregarPaciente(Paciente paciente) throws BadRequestException, MethodArgumentNotValidException {
 
-        Paciente pacienteNuevo = pacienteRepository.save(paciente);
-        LOGGER.info("Nuevo paciente registrado con exito {} ", JsonPrinter.toString(pacienteNuevo));
+            Paciente pacienteNuevo = pacienteRepository.save(paciente);
+            DomicilioDTO domicilioDto = objectMapper.convertValue(pacienteNuevo.getDomicilio(), DomicilioDTO.class);
+            PacienteDTO pacienteDtoNuevo = objectMapper.convertValue(pacienteNuevo, PacienteDTO.class);
+            pacienteDtoNuevo.setDomicilioDTO(domicilioDto);
+
+            if(pacienteDtoNuevo!=null){
+                LOGGER.info("Nuevo paciente registrado con exito: {}", JsonPrinter.toString(pacienteDtoNuevo));
+            }else{
+                LOGGER.info("Nuevo paciente NO registrado con exito: {}", JsonPrinter.toString(pacienteDtoNuevo));
+                throw new BadRequestException("No se pudo agregar el paciente, por favor revise");
+            }
+
+            return pacienteDtoNuevo;
 
     }
 
     @Override
-    public void modificarPaciente(Paciente paciente) throws ResourceNotFoundException {
+    public PacienteDTO modificarPaciente(Paciente paciente) throws ResourceNotFoundException {
         Paciente pacienteAActualizar = pacienteRepository.findById(paciente.getId()).orElse(null);
+        PacienteDTO pacienteDTOActualizado = null;
 
         if(pacienteAActualizar != null){
             pacienteAActualizar = paciente;
             pacienteRepository.save(pacienteAActualizar);
+            pacienteDTOActualizado = objectMapper.convertValue(pacienteAActualizar, PacienteDTO.class);
+            DomicilioDTO domicilioDto = objectMapper.convertValue(pacienteAActualizar.getDomicilio(), DomicilioDTO.class);
+            pacienteDTOActualizado.setDomicilioDTO(domicilioDto);
             LOGGER.info("Paciente modificado con exito: {}", pacienteAActualizar);
         }else{
             LOGGER.info("No fue posible actualizar, ya que no existe el paciente");
             throw new ResourceNotFoundException("No fue posible actualizar.");
         }
+
+        return pacienteDTOActualizado;
 
     }
 
@@ -127,6 +146,5 @@ public class PacienteService implements IPacienteService {
         return turnosDTO;
 
     }
-
 
 }
