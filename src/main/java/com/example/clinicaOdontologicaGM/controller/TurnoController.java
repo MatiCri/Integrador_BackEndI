@@ -30,15 +30,15 @@ public class TurnoController {
     }
 
     @PostMapping
-    public ResponseEntity<?> agregarTurno(@Valid  @RequestBody Turno turno) throws ResourceNotFoundException, BadRequestException {
-        turnoService.agregarTurno(turno);
-        return ResponseEntity.ok("Turno agregado con Exito");
+    public ResponseEntity<TurnoDTO> agregarTurno(@Valid  @RequestBody Turno turno) throws ResourceNotFoundException, BadRequestException {
+        TurnoDTO turnoDto = turnoService.agregarTurno(turno);
+        return new ResponseEntity<>(turnoDto, null, HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<?> modificarTurno(@Valid @RequestBody Turno turno) throws ResourceNotFoundException {
-        turnoService.modificarTurno(turno);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<TurnoDTO> modificarTurno(@Valid @RequestBody Turno turno) throws ResourceNotFoundException {
+        TurnoDTO turnoDtoActualizado = turnoService.modificarTurno(turno);
+        return new ResponseEntity<>(turnoDtoActualizado, null, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface ITurnoService {
 
-    void agregarTurno(Turno turno) throws ResourceNotFoundException, BadRequestException;
-    void modificarTurno(Turno turno) throws ResourceNotFoundException;
+    TurnoDTO agregarTurno(Turno turno) throws ResourceNotFoundException, BadRequestException;
+    TurnoDTO modificarTurno(Turno turno) throws ResourceNotFoundException;
     void eliminarTurno(Long id) throws ResourceNotFoundException;
     TurnoDTO buscarTurno(Long id) throws ResourceNotFoundException;
     List<TurnoDTO> listarTurnos();

@@ -38,28 +38,50 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
-    public void agregarTurno(Turno turno) throws BadRequestException, ResourceNotFoundException {
-
+    public TurnoDTO agregarTurno(Turno turno) throws BadRequestException, ResourceNotFoundException {
+        TurnoDTO turnoDTO = null;
         PacienteDTO paciente = pacienteService.buscarPaciente(turno.getPaciente().getId());
         OdontologoDTO odontologo = odontologoService.buscarOdonotologo(turno.getOdontologo().getId());
 
-        turnoRepository.save(turno);
-        LOGGER.info("Nuevo turno registrado con exito: {}", JsonPrinter.toString(turno));
+        if(paciente == null || odontologo == null) {
+            if(paciente == null && odontologo == null) {
+                LOGGER.error("El paciente y el odontologo no se encuentran en nuestra base de datos");
+                throw new BadRequestException("El paciente no se encuentra en nuestra base de datos");
+            }
+            else if (paciente == null){
+                LOGGER.error("El paciente no se encuentra en nuestra base de datos");
+                throw new BadRequestException("El paciente no se encuentra en nuestra base de datos");
+            } else {
+                LOGGER.error("El odontologo no se encuentra en nuestra base de datos");
+                throw new BadRequestException("El odontologo no se encuentra en nuestra base de datos");
+            }
+
+        } else {
+            turnoDTO = TurnoDTO.fromTurno(turnoRepository.save(turno));
+            LOGGER.info("Nuevo turno registrado con exito: {}", JsonPrinter.toString(turnoDTO));
+        }
+
+        return turnoDTO;
     }
 
     @Override
-    public void modificarTurno(Turno turno) throws ResourceNotFoundException{
+    public TurnoDTO modificarTurno(Turno turno) throws ResourceNotFoundException{
 
         Turno turnoAActualizar = turnoRepository.findById(turno.getId()).orElse(null);
+        TurnoDTO turnoDtoActualizado = null;
+
 
         if(turnoAActualizar != null){
             turnoAActualizar = turno;
             turnoRepository.save(turnoAActualizar);
+            turnoDtoActualizado = TurnoDTO.fromTurno(turnoAActualizar);
             LOGGER.info("Turno modificado con exito: {}", turnoAActualizar);
         }else{
             LOGGER.info("No fue posible actualizar, ya que no existe el turno");
             throw new ResourceNotFoundException("No se ha encontrado el turno");
         }
+
+        return turnoDtoActualizado;
 
     }
 

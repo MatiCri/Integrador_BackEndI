@@ -32,25 +32,32 @@ public class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public void agregarOdontologo(Odontologo odontologo)  {
+    public OdontologoDTO agregarOdontologo(Odontologo odontologo)  {
 
         Odontologo odontologoGuardado = odontologoRepository.save(odontologo);
+        OdontologoDTO odontologoDTO = objectMapper.convertValue(odontologoGuardado, OdontologoDTO.class);
         LOGGER.info("Nuevo odontologo registrado con exito: {}", JsonPrinter.toString(odontologoGuardado));
+
+        return odontologoDTO;
 
     }
 
     @Override
-    public void modificarOdontologo(Odontologo odontologo) throws ResourceNotFoundException {
+    public OdontologoDTO modificarOdontologo(Odontologo odontologo) throws ResourceNotFoundException {
         Odontologo odontologoAActualizar = odontologoRepository.findById(odontologo.getId()).orElse(null);
+        OdontologoDTO odontologoDTO = null;
 
         if(odontologoAActualizar != null){
             odontologoAActualizar = odontologo;
-            odontologoRepository.save(odontologo);
+            odontologoRepository.save(odontologoAActualizar);
+            odontologoDTO = objectMapper.convertValue(odontologoAActualizar, OdontologoDTO.class);
             LOGGER.info("Odontologo modificado con exito: {}", odontologoAActualizar);
         }else{
             LOGGER.info("No fue posible actualizar, ya que no existe el odontologo");
             throw new ResourceNotFoundException("No se ha encontrado el Odontologo");
         }
+
+        return odontologoDTO;
     }
 
     @Override

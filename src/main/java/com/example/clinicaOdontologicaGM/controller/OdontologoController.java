@@ -3,6 +3,7 @@ package com.example.clinicaOdontologicaGM.controller;
 import com.example.clinicaOdontologicaGM.dto.OdontologoDTO;
 import com.example.clinicaOdontologicaGM.dto.PacienteDTO;
 import com.example.clinicaOdontologicaGM.entity.Odontologo;
+import com.example.clinicaOdontologicaGM.exceptions.BadRequestException;
 import com.example.clinicaOdontologicaGM.exceptions.ResourceNotFoundException;
 import com.example.clinicaOdontologicaGM.service.IOdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,24 @@ public class OdontologoController {
     }
 
     @PostMapping
-    public ResponseEntity<?> agregarOdontologo(@Valid  @RequestBody Odontologo odontologo) throws MethodArgumentNotValidException {
-        odontologoService.agregarOdontologo(odontologo);
-        return ResponseEntity.ok("Odontologo guardado con Exito");
+    public ResponseEntity<OdontologoDTO> agregarOdontologo(@Valid  @RequestBody Odontologo odontologo) throws BadRequestException, MethodArgumentNotValidException {
+        ResponseEntity<OdontologoDTO> respuesta;
+        OdontologoDTO odontologoDTO = odontologoService.agregarOdontologo(odontologo);
+        if(odontologoDTO!=null) respuesta = new ResponseEntity<>(odontologoDTO, null, HttpStatus.CREATED);
+        else respuesta = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        return respuesta;
     }
 
     @PutMapping
-    public ResponseEntity<?> modificarOdontologo(@Valid @RequestBody Odontologo odontologo) throws ResourceNotFoundException {
-        odontologoService.modificarOdontologo(odontologo);
-        return ResponseEntity.ok("Odontologo encontrado con Exito");
+    public ResponseEntity<OdontologoDTO> modificarOdontologo(@Valid @RequestBody Odontologo odontologo) throws ResourceNotFoundException {
+        ResponseEntity<OdontologoDTO> respuesta;
+        OdontologoDTO odontologoDTO = odontologoService.modificarOdontologo(odontologo);
+        if(odontologoDTO!=null) respuesta = new ResponseEntity<>(odontologoDTO, null, HttpStatus.CREATED);
+        else respuesta = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        return respuesta;
+
     }
 
     @DeleteMapping("/{id}")

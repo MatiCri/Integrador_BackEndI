@@ -9,8 +9,8 @@ import java.util.Set;
 
 public interface IOdontologoService {
 
-    void agregarOdontologo(Odontologo odontologo) throws MethodArgumentNotValidException;
-    void modificarOdontologo(Odontologo odontologo) throws ResourceNotFoundException;
+    OdontologoDTO agregarOdontologo(Odontologo odontologo) throws MethodArgumentNotValidException;
+    OdontologoDTO modificarOdontologo(Odontologo odontologo) throws ResourceNotFoundException;
     void eliminarOdontologo(Long id) throws ResourceNotFoundException;
     OdontologoDTO buscarOdonotologo(Long id) throws ResourceNotFoundException;
     Set<OdontologoDTO> listarOdontologos();
