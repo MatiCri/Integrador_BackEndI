@@ -26,7 +26,7 @@
         <hr/>
         <div class="fila" >
             <div class="form">
-                <form id="buscarPacienteForm" action="" method="">
+                <form id="buscarTurnoForm" action="" method="">
                     <label for="id_turno">ID Turno:</label>
                     <input type="number" id="id_turno" name="nombre" required>
                     <input class="buscar" type="submit" value="Buscar Turno">
@@ -48,41 +48,21 @@
         <hr/>
         <div class="form">
             <form id="add_turno">
-                <div class="inputsAlta" style="display: none">
-                    <label for="id_turno">ID:</label>
-                    <input type="number" id="id_turno_form" name="id_turno" readonly>
+                <div class="inputsAlta" >
+                    <label for="id_turno_form">ID:</label>
+                    <input type="number" id="id_turno_form" name="id_turno_form" readonly>
                 </div>
                 <div class="inputsAlta">
-                    <label for="nombre_turno">Nombre:</label>
-                    <input type="text" id="nombre_turno" name="nombre_turno" required>
+                    <label for="id_paciente_turno">ID Paciente:</label>
+                    <input type="text" id="id_paciente_turno" name="id_paciente_turno" required>
                 </div>
                 <div class="inputsAlta">
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" id="apellido" name="apellido" required>
+                    <label for="id_odontologo_turno">ID Odontologo :</label>
+                    <input type="text" id="id_odontologo_turno" name="id_odontologo_turno" required>
                 </div>
                 <div class="inputsAlta">
-                    <label for="dni">DNI:</label>
-                    <input type="text" id="dni" name="dni" required>
-                </div>
-                <div class="inputsAlta">
-                    <label for="fecha_ingreso">Fecha ingreso:</label>
-                    <input type="text" id="fecha_ingreso" name="fecha_ingreso" required>
-                </div>
-                <div class="inputsAlta">
-                    <label for="domicilio_calle">Calle domicilio:</label>
-                    <input type="text" id="domicilio_calle" name="domicilio_calle" required>
-                </div>
-                <div class="inputsAlta">
-                    <label for="nro_domicilio">Número domicilio:</label>
-                    <input type="text" id="nro_domicilio" name="nro_domicilio" required>
-                </div>
-                <div class="inputsAlta">
-                    <label for="localidad_domicilio">Localidad domicilio:</label>
-                    <input type="text" id="localidad_domicilio" name="localidad_domicilio" required>
-                </div>
-                <div class="inputsAlta">
-                    <label for="provincia_domicilio">Provincia domicilio:</label>
-                    <input type="text" id="provincia_domicilio" name="provincia_domicilio" required>
+                    <label for="fecha_hora_turno">Fecha y Hora Turno:</label>
+                    <input type="text" id="fecha_hora_turno" name="fecha_hora_turno" required>
                 </div>
                 <div>
                     <input class="add" type="submit" value="Crear/Modificar">

@@ -170,11 +170,18 @@ window.addEventListener('load', function(){
 
                 fetch(url, settings)
                 .then(response => {
-                    return response.json();
+                    console.log("parte 1")
+                    console.log(response)
+                    if(!response.ok){
+                        alert("El odontologo tiene un turno asignado")
+                        return response.json(); 
+                    }
+                    return response.text();
                 })
                 .then(data  => {
-                    console.log(data);
-                    //location.reload();
+                    console.log("parte 2")
+                    console.log(data)
+                    location.reload();
                 })
 
             });

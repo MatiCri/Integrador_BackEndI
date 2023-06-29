@@ -60,6 +60,9 @@ window.addEventListener('load', function(){
                 <div class="edit-delete">
                     <button type="submit" class="delete" id="${paciente.id}">Eliminar Paciente</button>
                     <button type="submit" class="update" id="${paciente.id}">Modificar Paciente</button>
+                </div>
+                <div class="${paciente.id}">
+
                 </div>               
             </div> 
             `   
@@ -178,13 +181,19 @@ window.addEventListener('load', function(){
                 const settings = {
                     method: "DELETE"
                 }
-
                 fetch(url, settings)
                 .then(response => {
+                    console.log("parte 1")
+                    console.log(response)
+                    if(!response.ok){
+                        alert("El paciente tiene un turno asignado")
+                        return response.json(); 
+                    }
                     return response.text();
                 })
                 .then(data  => {
-                    console.log(data);
+                    console.log("parte 2")
+                    console.log(data)
                     location.reload();
                 })
 
@@ -252,7 +261,6 @@ window.addEventListener('load', function(){
 
     function agregarPaciente(settings){
         console.log("lanzando agregar paciente");
-        const respuesta = document.querySelector("#respuesta");
 
         const url = 'http://localhost:8080/pacientes/';
 
