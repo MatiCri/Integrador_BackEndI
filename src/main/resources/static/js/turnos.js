@@ -1,11 +1,11 @@
 window.addEventListener('load', function(){
 
-    obtenerPacientes();
+    obtenerTurnos();
 
-    const buscarPacienteForm = document.querySelector('#buscarPacienteForm');
-    const formAddPaciente = document.querySelector('#add_paciente');
-    const id_paciente_form = document.querySelector('#id_paciente_form');
-    const nombre = document.querySelector('#nombre_paciente');
+    const buscarTurnoForm = document.querySelector('#buscarTurnoForm');
+    const formAddEstudiiante = document.querySelector('#add_estudiante');
+    const id_turno_form = document.querySelector('#id_turno_form');
+    const nombre = document.querySelector('#nombre_turno');
     const apellido = document.querySelector('#apellido');
     const dni = document.querySelector('#dni');
     const fecha_ingreso = document.querySelector('#fecha_ingreso');
@@ -13,16 +13,16 @@ window.addEventListener('load', function(){
     const nro_domicilio = document.querySelector('#nro_domicilio');
     const localidad_domiclio = document.querySelector('#localidad_domicilio');
     const prov_domicilio = document.querySelector('#provincia_domicilio');
-    const pacienteEncontrado = document.querySelector('#buscarporID');
+    const turnoEncontrado = document.querySelector('#buscarporID');
     
 
 /* -------------------------------------------------------------------------- */
-/*                 Obtengo listado de pacientes [GET]                         */
+/*                 Obtengo listado de turnos [GET]                         */
 /* -------------------------------------------------------------------------- */
 
-    function  obtenerPacientes(){
+    function  obtenerTurnos(){
 
-        const url = 'http://localhost:8080/pacientes';
+        const url = 'http://localhost:8080/turnos';
 
         fetch(url)
         .then(response => {
@@ -32,7 +32,7 @@ window.addEventListener('load', function(){
             return response.json();
         })
         .then(data  => {
-            renderizarPacientes(data);
+            renderizarTurnos(data);
         })
         .catch(err =>{
             console.log(err);
@@ -41,30 +41,30 @@ window.addEventListener('load', function(){
     };
 
 /* -------------------------------------------------------------------------- */
-/*                 Renderizo listado de pacientes                             */
+/*                 Renderizo listado de turnos                             */
 /* -------------------------------------------------------------------------- */
 
-    function renderizarPacientes(listado){
-        const listadoPacientes = document.querySelector('#fila');
+    function renderizarTurnos(listado){
+        const listadoTurnos = document.querySelector('#fila');
 
-        listadoPacientes.innerHTML = "";
+        listadoTurnos.innerHTML = "";
 
-        listado.forEach(paciente => {
-            listadoPacientes.innerHTML += `
+        listado.forEach(turno => {
+            listadoTurnos.innerHTML += `
             <div class="caja">
-                <h3>${paciente.nombre} ${paciente.apellido}</h3>
-                <p>ID: ${paciente.id}</p>
-                <p>DNI: ${paciente.dni}</p>
-                <p>Fecha Ingreso: ${paciente.fechaIngreso}</p>
-                <p>Domicilio: ${paciente.domicilioDTO.calle}</p> 
+                <h3>${turno.nombre} ${turno.apellido}</h3>
+                <p>ID: ${turno.id}</p>
+                <p>DNI: ${turno.dni}</p>
+                <p>Fecha Ingreso: ${turno.fechaIngreso}</p>
+                <p>Domicilio: ${turno.domicilioDTO.calle}</p> 
                 <div class="edit-delete">
-                    <button type="submit" class="delete" id="${paciente.id}">Eliminar Paciente</button>
-                    <button type="submit" class="update" id="${paciente.id}">Modificar Paciente</button>
+                    <button type="submit" class="delete" id="${turno.id}">Eliminar Turno</button>
+                    <button type="submit" class="update" id="${turno.id}">Modificar Turno</button>
                 </div>               
             </div> 
             `   
-        eliminarPacientes();
-        renderizarPacienteAModificar();
+        eliminarTurnos();
+        renderizarTurnoAModificar();
 
         });
 
@@ -73,24 +73,24 @@ window.addEventListener('load', function(){
 
 
 /* -------------------------------------------------------------------------- */
-/*                 Buscar el paciente por ID                                  */
+/*                 Buscar el turno por ID                                  */
 /* -------------------------------------------------------------------------- */
 
-    function buscarPacientePorID(id){
+    function buscarTurnoPorID(id){
 
-        const url = 'http://localhost:8080/pacientes/' + id
+        const url = 'http://localhost:8080/turnos/' + id
 
         return fetch(url)
         .then(response => {
             return response.json();
         })
         .then(data  => {
-            console.log("ENTRO ACA, primera parte Buscar Paciente")
+            console.log("ENTRO ACA, primera parte Buscar Turno")
             if(data.message!=undefined){
                 console.log(data.message);
 
-                pacienteEncontrado.innerHTML = "";
-                pacienteEncontrado.innerHTML +=  `
+                turnoEncontrado.innerHTML = "";
+                turnoEncontrado.innerHTML +=  `
                     <h3>PACIENTE NO ENCONTRADO</h3>
                 `
             }else{
@@ -106,21 +106,21 @@ window.addEventListener('load', function(){
 
 
 /* -------------------------------------------------------------------------- */
-/*                 Obtener el paciente por ID                                  */
+/*                 Obtener el turno por ID                                  */
 /* -------------------------------------------------------------------------- */
 
-    buscarPacienteForm.addEventListener('submit', function(e){
-        console.log("lanzando buscarpaciente form");
+    buscarTurnoForm.addEventListener('submit', function(e){
+        console.log("lanzando buscarturno form");
 
         e.preventDefault();
-        var id = document.getElementById("id_paciente").value;
+        var id = document.getElementById("id_turno").value;
 
-        buscarPacientePorID(id)
+        buscarTurnoPorID(id)
         .then(response =>{
             if(response!=undefined){
-                renderizarPacientePorID(response)
+                renderizarTurnoPorID(response)
             }else{
-                console.log("No se encontro al paciente")
+                console.log("No se encontro al turno")
             }
         })
         .catch(e => {
@@ -132,40 +132,40 @@ window.addEventListener('load', function(){
     });
 
 /* -------------------------------------------------------------------------- */
-/*                 Renderizo el paciente por ID                               */
+/*                 Renderizo el turno por ID                               */
 /* -------------------------------------------------------------------------- */
 
 
-    function renderizarPacientePorID(paciente){
-        console.log("lanzando renderizar paciente")
+    function renderizarTurnoPorID(turno){
+        console.log("lanzando renderizar turno")
 
         
 
-        pacienteEncontrado.innerHTML = "";
-        pacienteEncontrado.innerHTML +=  `
-            <h3>${paciente.nombre} ${paciente.apellido}</h3>
-            <p>ID: ${paciente.id}</p>
-            <p>DNI: ${paciente.dni}</p>
-            <p>Fecha Ingreso: ${paciente.fechaIngreso}</p>
-            <p>Domicilio: ${paciente.domicilioDTO.calle}</p> 
+        turnoEncontrado.innerHTML = "";
+        turnoEncontrado.innerHTML +=  `
+            <h3>${turno.nombre} ${turno.apellido}</h3>
+            <p>ID: ${turno.id}</p>
+            <p>DNI: ${turno.dni}</p>
+            <p>Fecha Ingreso: ${turno.fechaIngreso}</p>
+            <p>Domicilio: ${turno.domicilioDTO.calle}</p> 
             <div class="edit-delete">
-                <button type="submit" class="delete" id="${paciente.id}">Eliminar Paciente</button>
-                <button type="submit" class="update" id="${paciente.id}">Modificar Paciente</button>
+                <button type="submit" class="delete" id="${turno.id}">Eliminar Turno</button>
+                <button type="submit" class="update" id="${turno.id}">Modificar Turno</button>
             </div>   
         `
-        eliminarPacientes();
-        renderizarPacienteAModificar();
+        eliminarTurnos();
+        renderizarTurnoAModificar();
     }
 
 /* -------------------------------------------------------------------------- */
-/*                 Eliminar Paciente                                          */
+/*                 Eliminar Turno                                          */
 /* -------------------------------------------------------------------------- */
 
-    function eliminarPacientes(){
+    function eliminarTurnos(){
 
-        const eliminarPacienteButtons = document.querySelectorAll('.delete');
+        const eliminarTurnoButtons = document.querySelectorAll('.delete');
 
-        eliminarPacienteButtons.forEach(button => {
+        eliminarTurnoButtons.forEach(button => {
 
             button.addEventListener('click', function(e){
                 e.preventDefault();
@@ -173,7 +173,7 @@ window.addEventListener('load', function(){
                 var id =  e.target.id;
                 console.log(id);
                 
-                const url = 'http://localhost:8080/pacientes/' + id;
+                const url = 'http://localhost:8080/turnos/' + id;
 
                 const settings = {
                     method: "DELETE"
@@ -195,16 +195,16 @@ window.addEventListener('load', function(){
 
 
 /* -------------------------------------------------------------------------- */
-/*                 Tomo datos del Submit Agregar Paciente                     */
+/*                 Tomo datos del Submit Agregar Turno                     */
 /* -------------------------------------------------------------------------- */
-    formAddPaciente.addEventListener('submit', function(e){
+    formAddEstudiiante.addEventListener('submit', function(e){
 
         e.preventDefault();
         console.log("LANZANDO EL SUBMIT DEL FORMULARIO");
 
         const usuario = 
         {   
-            "id":id_paciente_form.value,
+            "id":id_turno_form.value,
             "nombre": nombre.value,
             "apellido": apellido.value,
             "dni": dni.value,
@@ -236,25 +236,25 @@ window.addEventListener('load', function(){
 
 
         if(usuario.id == ""){
-            agregarPaciente(settingsAgregar);
+            agregarTurno(settingsAgregar);
         }else{
-            modificarPaciente(settingsModificar)
+            modificarTurno(settingsModificar)
         }
 
-        formAddPaciente.reset();
+        formAddEstudiiante.reset();
 
     });
 
 
 /* -------------------------------------------------------------------------- */
-/*                 Agrego el paciente                                         */
+/*                 Agrego el turno                                         */
 /* -------------------------------------------------------------------------- */
 
-    function agregarPaciente(settings){
-        console.log("lanzando agregar paciente");
+    function agregarTurno(settings){
+        console.log("lanzando agregar turno");
         const respuesta = document.querySelector("#respuesta");
 
-        const url = 'http://localhost:8080/pacientes/';
+        const url = 'http://localhost:8080/turnos/';
 
         fetch(url, settings)
         .then(response =>{
@@ -283,22 +283,22 @@ window.addEventListener('load', function(){
 
 
 /* -------------------------------------------------------------------------- */
-/*                 Renderizar modificar paciente                                         */
+/*                 Renderizar modificar turno                                         */
 /* -------------------------------------------------------------------------- */
 
 
-    function renderizarPacienteAModificar(){
+    function renderizarTurnoAModificar(){
 
-        const modificarPacientesButttons = document.querySelectorAll('.update');
+        const modificarTurnosButttons = document.querySelectorAll('.update');
 
-        modificarPacientesButttons.forEach(button => {
+        modificarTurnosButttons.forEach(button => {
 
             button.addEventListener('click', function(e){
                 var id =  e.target.id;
                 console.log('LANZANDO BUTTON MODIFICAR');
-                buscarPacientePorID(id)
+                buscarTurnoPorID(id)
                 .then(data =>{
-                    const pacienteAModificar = 
+                    const turnoAModificar = 
                     {   
                         "id": data.id,
                         "nombre": data.nombre,
@@ -313,15 +313,15 @@ window.addEventListener('load', function(){
                         }
                     };
 
-                    id_paciente_form.value = pacienteAModificar.id;
-                    nombre.value = pacienteAModificar.nombre;
-                    apellido.value = pacienteAModificar.apellido;
-                    dni.value = pacienteAModificar.dni;
-                    fecha_ingreso.value = pacienteAModificar.fechaIngreso;
-                    calle_domicilio.value = pacienteAModificar.domicilio.calle;
-                    nro_domicilio.value = pacienteAModificar.domicilio.numero;
-                    localidad_domiclio.value = pacienteAModificar.domicilio.localidad;
-                    prov_domicilio.value = pacienteAModificar.domicilio.provincia;
+                    id_turno_form.value = turnoAModificar.id;
+                    nombre.value = turnoAModificar.nombre;
+                    apellido.value = turnoAModificar.apellido;
+                    dni.value = turnoAModificar.dni;
+                    fecha_ingreso.value = turnoAModificar.fechaIngreso;
+                    calle_domicilio.value = turnoAModificar.domicilio.calle;
+                    nro_domicilio.value = turnoAModificar.domicilio.numero;
+                    localidad_domiclio.value = turnoAModificar.domicilio.localidad;
+                    prov_domicilio.value = turnoAModificar.domicilio.provincia;
 
                 })
                 .catch(e => {
@@ -336,14 +336,14 @@ window.addEventListener('load', function(){
 
 
 /* -------------------------------------------------------------------------- */
-/*                  Modificar paciente                                         */
+/*                  Modificar turno                                         */
 /* -------------------------------------------------------------------------- */
 
 
-    function modificarPaciente(settings){
-        console.log("lanzando modificar paciente");
+    function modificarTurno(settings){
+        console.log("lanzando modificar turno");
 
-        const url = 'http://localhost:8080/pacientes/';
+        const url = 'http://localhost:8080/turnos/';
 
         fetch(url, settings)
         .then(response =>{

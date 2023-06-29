@@ -5,31 +5,31 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pacientes</title>
+<title>Turnos</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../styles/styles.css" />
-<script type="text/javascript" src="../static/js/pacientes.js"></script>
+<script type="text/javascript" src="../static/js/turnos.js"></script>
 </head>
 
 <header>
 <a href="/templates/index.html" class="volverAInicio">
     <img  src="../imgs/images.jpeg" alt="">
 </a>
-<h1>Pacientes - Clínica odontológica GM</h1>
+<h1>Turnos - Clínica odontológica GM</h1>
 </header>
 
 <body>
     <div id="sitio">
         <hr/>
-            <h2>Buscar paciente por id</h2>
+            <h2>Buscar turno por id</h2>
         <hr/>
         <div class="fila" >
             <div class="form">
                 <form id="buscarPacienteForm" action="" method="">
-                    <label for="id_paciente">ID Paciente:</label>
-                    <input type="number" id="id_paciente" name="nombre" required>
-                    <input class="buscar" type="submit" value="Buscar Paciente">
+                    <label for="id_turno">ID Turno:</label>
+                    <input type="number" id="id_turno" name="nombre" required>
+                    <input class="buscar" type="submit" value="Buscar Turno">
                 </form>
                 <div class="caja" id="buscarporID">
                     
@@ -38,23 +38,23 @@
             
         </div>
         <hr/>
-            <h2>Listado pacientes</h2>
+            <h2>Listado turnos</h2>
         <hr/>
         <div id="fila">
 
         </div>
         <hr/>
-            <h2>Alta / Modificación pacientes</h2>
+            <h2>Alta / Modificación turnos</h2>
         <hr/>
         <div class="form">
-            <form id="add_paciente">
+            <form id="add_turno">
                 <div class="inputsAlta" style="display: none">
-                    <label for="id_paciente">ID:</label>
-                    <input type="number" id="id_paciente_form" name="id_paciente" readonly>
+                    <label for="id_turno">ID:</label>
+                    <input type="number" id="id_turno_form" name="id_turno" readonly>
                 </div>
                 <div class="inputsAlta">
-                    <label for="nombre_paciente">Nombre:</label>
-                    <input type="text" id="nombre_paciente" name="nombre_paciente" required>
+                    <label for="nombre_turno">Nombre:</label>
+                    <input type="text" id="nombre_turno" name="nombre_turno" required>
                 </div>
                 <div class="inputsAlta">
                     <label for="apellido">Apellido:</label>
