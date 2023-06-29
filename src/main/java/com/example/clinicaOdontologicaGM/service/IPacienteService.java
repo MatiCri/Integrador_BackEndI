@@ -16,7 +16,7 @@ public interface IPacienteService {
 
     PacienteDTO agregarPaciente(Paciente paciente) throws BadRequestException, MethodArgumentNotValidException;
     PacienteDTO modificarPaciente(Paciente paciente) throws ResourceNotFoundException;
-    void eliminarPaciente(Long id) throws ResourceNotFoundException;
+    void eliminarPaciente(Long id) throws ResourceNotFoundException, BadRequestException;
     PacienteDTO buscarPaciente(Long id) throws ResourceNotFoundException;
     Set<PacienteDTO> listarPacientes();
 

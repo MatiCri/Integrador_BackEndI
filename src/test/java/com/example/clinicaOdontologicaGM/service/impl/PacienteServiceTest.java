@@ -55,7 +55,7 @@ class PacienteServiceTest {
 
     @Test
     @Order(4)
-    void deberiaEliminarElPacienteId1() throws ResourceNotFoundException {
+    void deberiaEliminarElPacienteId1() throws ResourceNotFoundException, BadRequestException {
         pacienteService.eliminarPaciente(1L);
         Assertions.assertThrows(ResourceNotFoundException.class, () -> pacienteService. eliminarPaciente(1L));
     }

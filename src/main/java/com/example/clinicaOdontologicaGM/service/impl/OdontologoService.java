@@ -1,18 +1,19 @@
 package com.example.clinicaOdontologicaGM.service.impl;
 
 import com.example.clinicaOdontologicaGM.dto.OdontologoDTO;
+import com.example.clinicaOdontologicaGM.dto.TurnoDTO;
 import com.example.clinicaOdontologicaGM.entity.Odontologo;
+import com.example.clinicaOdontologicaGM.entity.Turno;
+import com.example.clinicaOdontologicaGM.exceptions.BadRequestException;
 import com.example.clinicaOdontologicaGM.exceptions.ResourceNotFoundException;
 import com.example.clinicaOdontologicaGM.repository.IOdontologoRepository;
 import com.example.clinicaOdontologicaGM.service.IOdontologoService;
 import com.example.clinicaOdontologicaGM.utils.JsonPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jdk.dynalink.beans.StaticClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -61,8 +62,11 @@ public class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public void eliminarOdontologo(Long id) throws ResourceNotFoundException {
-        if(buscarOdonotologo(id) != null){
+    public void eliminarOdontologo(Long id) throws ResourceNotFoundException, BadRequestException {
+        if(!buscarTurnosPorOdontologo(id).isEmpty() ) {
+            LOGGER.error("Pacientee NO eliminado con exito");
+            throw new BadRequestException("No fue posible eliminar ya que tiene turnos asignados");
+        }if(buscarOdonotologo(id) != null){
             odontologoRepository.deleteById(id);
             LOGGER.info("Odontologo eliminado con exito");
         }else{
@@ -98,5 +102,17 @@ public class OdontologoService implements IOdontologoService {
         }
 
         return odontologosDTO;
+    }
+
+    @Override
+    public List<TurnoDTO> buscarTurnosPorOdontologo(Long id) {
+
+        List<Turno> turnos = odontologoRepository.buscarTurnosPorOdontologo(id);
+        List<TurnoDTO> turnosDTO = turnos.stream()
+                .map(TurnoDTO::fromTurno)
+                .toList();
+
+        return turnosDTO;
+
     }
 }
