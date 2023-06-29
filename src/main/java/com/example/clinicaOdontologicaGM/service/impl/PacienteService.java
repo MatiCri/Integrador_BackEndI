@@ -95,9 +95,9 @@ public class PacienteService implements IPacienteService {
             throw new BadRequestException("No fue posible eliminar ya que tiene turnos asignados");
         }if (buscarPaciente(id) != null) {
             pacienteRepository.deleteById(id);
-            LOGGER.info("Pacientee eliminado con exito");
-        } else{
-            LOGGER.error("Pacientee NO eliminado con exito");
+            LOGGER.info("Paciente eliminado con exito");
+        }else{
+            LOGGER.error("Paciente NO eliminado con exito");
             throw new ResourceNotFoundException("No fue posible eliminar.");
         }
 
