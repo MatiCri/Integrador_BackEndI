@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Odontologos</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../styles/styles.css" />
+<script type="text/javascript" src="../static/js/odontologos.js"></script>
+</head>
+
+<header>
+<a href="/templates/index.html" class="volverAInicio">
+    <img  src="../imgs/images.jpeg" alt="">
+</a>
+<h1>Odontologos - Clínica odontológica GM</h1>
+</header>
+
+<body>
+    <div id="sitio">
+        <hr/>
+            <h2>Buscar Odontologo por Id</h2>
+        <hr/>
+        <div class="fila">
+            <div class="form">
+                <form id="buscarOdontologoForm" action="" method="">
+                    <label for="id_odontologo">ID Odontologo:</label>
+                    <input type="number" id="id_odontologo" name="nombre" required>
+                    <input class="buscar" type="submit" value="Buscar Odontologo">
+                </form>
+                <div class="caja" id="buscarporID">
+                    
+                </div> 
+            </div>
+            
+        </div>
+        <hr/>
+            <h2>Listado Odontologos</h2>
+        <hr/>
+        <div id="fila">
+
+        </div>
+        <hr/>
+            <h2>Alta / Modificación Odontologos</h2>
+        <hr/>
+        <div class="form">
+            <form id="add_odontologo">
+                <div class="inputsAlta" style="display: none">
+                    <label for="id_odontologo">ID:</label>
+                    <input type="number" id="id_odontologo_form" name="id_odontologo" readonly>
+                </div>
+                <div class="inputsAlta">
+                    <label for="matricula">Matricula :</label>
+                    <input type="text" id="matricula" name="matricula" required>
+                </div>
+                <div class="inputsAlta">
+                    <label for="nombre_odontologo">Nombre:</label>
+                    <input type="text" id="nombre_odontologo" name="nombre_odontologo" required>
+                </div>
+                <div class="inputsAlta">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+                <div>
+                    <input class="add" type="submit" value="Crear/Modificar">
+                </div>
+
+                <div id="respuesta">
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
