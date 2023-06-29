@@ -111,7 +111,7 @@ public class PacienteService implements IPacienteService {
             DomicilioDTO domicilioDTO = objectMapper.convertValue(domicilio, DomicilioDTO.class);
             pacienteDTO.setDomicilioDTO(domicilioDTO);
         }else {
-            LOGGER.error("Paciente NO encontradp con exito");
+            LOGGER.error("Paciente NO encontrado con éxito");
             throw new ResourceNotFoundException("No fue posible encontrar al paciente");
         }
 

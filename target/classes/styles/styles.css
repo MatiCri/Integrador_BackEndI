@@ -1,0 +1,273 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+:root {
+  --card-bg: #cb1e41bd;
+  --shadow: 2px 5px 5px darkgray;
+  --white: whitesmoke;
+  --border-gray: 2px solid darkgray;
+}
+
+header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: box-shadow 0.5s;
+}
+
+
+#sitio{
+  padding: 2em;
+}
+
+section{
+  margin: 25px 0;
+}
+
+h1 {
+  padding: 2rem;
+  color: darkblue;
+}
+
+h3 {
+  margin: 0.5rem auto;
+  text-align: left;
+}
+
+input{
+  margin: 10px 25px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  color: var(--black);
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.5s;
+
+}
+.volverAInicio{
+  background-color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  color: var(--white);
+  font-weight: bold;
+  box-shadow: none;
+  transition: none;
+  margin: 5px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+a{
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: darkblue;;
+  color: var(--white);
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.5s;
+  margin: 5px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: darkblue;;
+  color: var(--white);
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.5s;
+  margin: 5px;
+  font-size: 20px;
+}
+
+.add {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: darkblue;
+    color: var(--white);
+    font-weight: bold;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.5s;
+    margin: 5px;
+    font-size: 20px;
+}
+
+.updateDB{
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: darkblue;
+  color: var(--white);
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.5s;
+  margin: 5px;
+  font-size: 20px;
+}
+
+.delete{
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: darkblue;
+  color: var(--white);
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.5s;
+  margin: 5px;
+  font-size: 10px;
+}
+
+.update{
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: darkblue;
+  color: var(--white);
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.5s;
+  margin: 5px;
+  font-size: 10px;
+}
+
+.buscar{
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: darkblue;
+  color: var(--white);
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.5s;
+  margin: 5px;
+  font-size: 15px;
+}
+
+
+button:hover {
+  cursor: pointer;
+  box-shadow: none;
+  transition: box-shadow 0.5s;
+}
+
+
+#fila {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.caja {
+  width: 30%;
+  text-align: center;
+  border: var(--border-gray);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  transition: box-shadow 0.5s;
+  margin: 1rem;
+}
+.caja h2{
+  font-size: 40px;
+}
+
+.caja form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  transition: box-shadow 0.5s;
+}
+
+.dark{
+  background-color: black;
+  color: white;
+}
+
+.caja:hover {
+  cursor: pointer;
+  box-shadow: none;
+  transition: box-shadow 0.5s;
+}
+
+.caja img {
+  width: 70%;
+  height: 70%;
+}
+
+.listarPacientes,
+.buscarPaciente {
+  margin: 0.5rem auto;
+}
+
+
+#sobre-mi {
+  margin: 15px 0;
+  margin-bottom: 1.5rem;
+}
+
+.caja-principal{
+  width: 90%;
+  text-align: center;
+  border: var(--border-gray);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  transition: box-shadow 0.5s;
+}
+
+.agregarPaciente{
+  width: 30%;
+  text-align: center;
+  border: var(--border-gray);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.5s;
+}
+
+.form{
+  display: flex;
+  justify-content: center;
+}
+
+.form form{
+  width: 35%;
+  text-align: center;
+  border: var(--border-gray);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.5s;
+  margin: 1rem;
+}
+

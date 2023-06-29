@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pacientes</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../styles/styles.css" />
+<script type="text/javascript" src="../static/js/pacientes.js"></script>
+</head>
+
+<header>
+<a href="/templates/index.html" class="volverAInicio">
+    <img  src="../imgs/images.jpeg" alt="">
+</a>
+<h1>Pacientes - Clínica odontológica GM</h1>
+</header>
+
+<body>
+    <div id="sitio">
+        <hr/>
+            <h2>Buscar paciente por id</h2>
+        <hr/>
+        <div class="fila" >
+            <div class="form">
+                <form id="buscarPacienteForm" action="" method="">
+                    <label for="id_paciente">ID Paciente:</label>
+                    <input type="number" id="id_paciente" name="nombre" required>
+                    <input class="buscar" type="submit" value="Buscar Paciente">
+                </form>
+                <div class="caja" id="buscarporID">
+                    
+                </div> 
+            </div>
+            
+        </div>
+        <hr/>
+            <h2>Listado pacientes</h2>
+        <hr/>
+        <div id="fila">
+
+        </div>
+        <hr/>
+            <h2>Alta / Modificación pacientes</h2>
+        <hr/>
+        <div class="form">
+            <form id="add_estudiante">
+                <div class="inputsAlta" style="display: none">
+                    <label for="id_paciente">ID:</label>
+                    <input type="number" id="id_paciente_form" name="id_paciente" readonly>
+                </div>
+                <div class="inputsAlta">
+                    <label for="nombre_paciente">Nombre:</label>
+                    <input type="text" id="nombre_paciente" name="nombre_paciente" required>
+                </div>
+                <div class="inputsAlta">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+                <div class="inputsAlta">
+                    <label for="dni">DNI:</label>
+                    <input type="text" id="dni" name="dni" required>
+                </div>
+                <div class="inputsAlta">
+                    <label for="fecha_ingreso">Fecha Ingreso:</label>
+                    <input type="text" id="fecha_ingreso" name="fecha_ingreso" required>
+                </div>
+                <div class="inputsAlta">
+                    <label for="domicilio_calle">Calle Domicilio:</label>
+                    <input type="text" id="domicilio_calle" name="domicilio_calle" required>
+                </div>
+                <div class="inputsAlta">
+                    <label for="nro_domicilio">Numero Domicilio:</label>
+                    <input type="text" id="nro_domicilio" name="nro_domicilio" required>
+                </div>
+                <div class="inputsAlta">
+                    <label for="localidad_domicilio">Localidad Domicilio:</label>
+                    <input type="text" id="localidad_domicilio" name="localidad_domicilio" required>
+                </div>
+                <div class="inputsAlta">
+                    <label for="provincia_domicilio">Provincia Domicilio:</label>
+                    <input type="text" id="provincia_domicilio" name="provincia_domicilio" required>
+                </div>
+                <div>
+                    <input class="add" type="submit" value="Crear/Modificar">
+                </div>
+
+                <div id="respuesta">
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
