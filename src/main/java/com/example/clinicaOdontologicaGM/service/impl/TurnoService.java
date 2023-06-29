@@ -3,6 +3,8 @@ package com.example.clinicaOdontologicaGM.service.impl;
 import com.example.clinicaOdontologicaGM.dto.OdontologoDTO;
 import com.example.clinicaOdontologicaGM.dto.PacienteDTO;
 import com.example.clinicaOdontologicaGM.dto.TurnoDTO;
+import com.example.clinicaOdontologicaGM.entity.Odontologo;
+import com.example.clinicaOdontologicaGM.entity.Paciente;
 import com.example.clinicaOdontologicaGM.entity.Turno;
 import com.example.clinicaOdontologicaGM.exceptions.BadRequestException;
 import com.example.clinicaOdontologicaGM.exceptions.ResourceNotFoundException;
@@ -15,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.Bidi;
 import java.util.List;
 
 @Service
@@ -40,15 +43,15 @@ public class TurnoService implements ITurnoService {
     @Override
     public TurnoDTO agregarTurno(Turno turno) throws BadRequestException, ResourceNotFoundException {
         TurnoDTO turnoDTO = null;
-        PacienteDTO paciente = pacienteService.buscarPaciente(turno.getPaciente().getId());
-        OdontologoDTO odontologo = odontologoService.buscarOdonotologo(turno.getOdontologo().getId());
+        PacienteDTO pacienteDTO = pacienteService.buscarPaciente(turno.getPaciente().getId());
+        OdontologoDTO odontologoDTO = odontologoService.buscarOdonotologo(turno.getOdontologo().getId());
 
-        if(paciente == null || odontologo == null) {
-            if(paciente == null && odontologo == null) {
+        if(pacienteDTO == null || odontologoDTO == null) {
+            if(pacienteDTO == null && odontologoDTO == null) {
                 LOGGER.error("El paciente y el odontologo no se encuentran en nuestra base de datos");
                 throw new BadRequestException("El paciente no se encuentra en nuestra base de datos");
             }
-            else if (paciente == null){
+            else if (pacienteDTO == null){
                 LOGGER.error("El paciente no se encuentra en nuestra base de datos");
                 throw new BadRequestException("El paciente no se encuentra en nuestra base de datos");
             } else {
@@ -57,7 +60,12 @@ public class TurnoService implements ITurnoService {
             }
 
         } else {
-            turnoDTO = TurnoDTO.fromTurno(turnoRepository.save(turno));
+            Turno turnoGuardado = turnoRepository.save(turno);
+            Paciente paciente = objectMapper.convertValue(pacienteDTO, Paciente.class);
+            Odontologo odontologo = objectMapper.convertValue(odontologoDTO, Odontologo.class);
+            turnoGuardado.setPaciente(paciente);
+            turnoGuardado.setOdontologo(odontologo);
+            turnoDTO = TurnoDTO.fromTurno(turnoGuardado);
             LOGGER.info("Nuevo turno registrado con exito: {}", JsonPrinter.toString(turnoDTO));
         }
 

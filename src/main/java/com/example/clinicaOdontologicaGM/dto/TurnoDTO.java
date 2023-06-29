@@ -62,8 +62,8 @@ public class TurnoDTO {
     }
 
     public static TurnoDTO fromTurno(Turno turno) {
-        String paciente = turno.getPaciente().getNombre() + " " + turno.getPaciente().getApellido();
-        String odontologo = turno.getOdontologo().getNombre() + " " + turno.getOdontologo().getApellido();
+        String paciente = turno.getPaciente().getNombre() + turno.getPaciente().getApellido();
+        String odontologo = turno.getOdontologo().getNombre() + turno.getOdontologo().getApellido();
         return new TurnoDTO(turno.getId(), paciente, odontologo, turno.getFechaTurno());
     }
 }
