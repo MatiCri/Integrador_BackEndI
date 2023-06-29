@@ -52,8 +52,8 @@ class TurnoServiceTest {
     @Test
     @Order(2)
     void deberiaListarUnSoloTurno(){
-        List<TurnoDTO> turnosDTOS = turnoService.listarTurnos();
-        assertEquals(1, turnosDTOS.size());
+        List<TurnoDTO> turnoDTOS = turnoService.listarTurnos();
+        assertEquals(1, turnoDTOS.size());
     }
 
     @Test
