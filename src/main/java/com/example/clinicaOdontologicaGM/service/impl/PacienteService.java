@@ -89,8 +89,11 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public void eliminarPaciente(Long id) throws ResourceNotFoundException{
-        if(buscarPaciente(id) != null){
+    public void eliminarPaciente(Long id) throws ResourceNotFoundException, BadRequestException {
+        if(!buscarTurnosPorPaciente(id).isEmpty() ){
+            LOGGER.error("Pacientee NO eliminado con exito");
+            throw new BadRequestException("No fue posible eliminar ya que tiene turnos asignados");
+        }if (buscarPaciente(id) != null) {
             pacienteRepository.deleteById(id);
             LOGGER.info("Paciente eliminado con exito");
         }else{
