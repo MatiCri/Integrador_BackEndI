@@ -270,7 +270,7 @@ window.addEventListener('load', function(){
         .then(data=>{
             console.log("promesa cumplida");
             console.log(data);
-            //location.reload();
+            location.reload();
         })
         .catch(err=>{
             console.log("promesa rechazada");
