@@ -110,13 +110,12 @@ public class TurnoService implements ITurnoService {
         Turno turnoEncontrado = turnoRepository.findById(id).orElse(null);
         TurnoDTO turnoDTO = null;
         if(turnoEncontrado != null){
-            turnoDTO = objectMapper.convertValue(turnoEncontrado, TurnoDTO.class);
+            turnoDTO = turnoDTO.fromTurno(turnoEncontrado);
             LOGGER.info("Turno encontrado con exito");
         }else{
             LOGGER.error("No se ha encontrado el turno");
             throw new ResourceNotFoundException("No se ha encontrado el turno");
         }
-
 
         return turnoDTO;
 

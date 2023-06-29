@@ -3,17 +3,11 @@ window.addEventListener('load', function(){
     obtenerTurnos();
 
     const buscarTurnoForm = document.querySelector('#buscarTurnoForm');
-    const formAddEstudiiante = document.querySelector('#add_estudiante');
+    const formAddTurno = document.querySelector('#add_turno');
     const id_turno_form = document.querySelector('#id_turno_form');
-    const nombre = document.querySelector('#nombre_turno');
-    const apellido = document.querySelector('#apellido');
-    const dni = document.querySelector('#dni');
-    const fecha_ingreso = document.querySelector('#fecha_ingreso');
-    const calle_domicilio = document.querySelector('#domicilio_calle');
-    const nro_domicilio = document.querySelector('#nro_domicilio');
-    const localidad_domiclio = document.querySelector('#localidad_domicilio');
-    const prov_domicilio = document.querySelector('#provincia_domicilio');
-    const turnoEncontrado = document.querySelector('#buscarporID');
+    const idPacienteTurno = document.querySelector('#id_paciente_turno');
+    const idOdontologoTurno = document.querySelector('#id_odontologo_turno');
+    const fechaHora = document.querySelector('#fecha_hora_turno');
     
 
 /* -------------------------------------------------------------------------- */
@@ -52,11 +46,9 @@ window.addEventListener('load', function(){
         listado.forEach(turno => {
             listadoTurnos.innerHTML += `
             <div class="caja">
-                <h3>${turno.nombre} ${turno.apellido}</h3>
-                <p>ID: ${turno.id}</p>
-                <p>DNI: ${turno.dni}</p>
-                <p>Fecha Ingreso: ${turno.fechaIngreso}</p>
-                <p>Domicilio: ${turno.domicilioDTO.calle}</p> 
+                <h3>${turno.paciente} y ${turno.odontologo} </h3>
+                <p>ID Turno: ${turno.id}</p>
+                <p>Fecha: ${turno.fechaTurno}</p>
                 <div class="edit-delete">
                     <button type="submit" class="delete" id="${turno.id}">Eliminar Turno</button>
                     <button type="submit" class="update" id="${turno.id}">Modificar Turno</button>
@@ -91,7 +83,7 @@ window.addEventListener('load', function(){
 
                 turnoEncontrado.innerHTML = "";
                 turnoEncontrado.innerHTML +=  `
-                    <h3>PACIENTE NO ENCONTRADO</h3>
+                    <h3>TURNO NO ENCONTRADO</h3>
                 `
             }else{
                 console.log(data)
@@ -197,7 +189,7 @@ window.addEventListener('load', function(){
 /* -------------------------------------------------------------------------- */
 /*                 Tomo datos del Submit Agregar Turno                     */
 /* -------------------------------------------------------------------------- */
-    formAddEstudiiante.addEventListener('submit', function(e){
+    formAddTurno.addEventListener('submit', function(e){
 
         e.preventDefault();
         console.log("LANZANDO EL SUBMIT DEL FORMULARIO");
