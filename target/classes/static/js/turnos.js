@@ -8,6 +8,7 @@ window.addEventListener('load', function(){
     const idPacienteTurno = document.querySelector('#id_paciente_turno');
     const idOdontologoTurno = document.querySelector('#id_odontologo_turno');
     const fechaHora = document.querySelector('#fecha_hora_turno');
+    const turnoEncontrado = document.querySelector('#buscarporID');
     
 
 /* -------------------------------------------------------------------------- */
@@ -119,8 +120,6 @@ window.addEventListener('load', function(){
             console.log(e);
         });
 
-
-
     });
 
 /* -------------------------------------------------------------------------- */
@@ -131,19 +130,16 @@ window.addEventListener('load', function(){
     function renderizarTurnoPorID(turno){
         console.log("lanzando renderizar turno")
 
-        
 
         turnoEncontrado.innerHTML = "";
         turnoEncontrado.innerHTML +=  `
-            <h3>${turno.nombre} ${turno.apellido}</h3>
-            <p>ID: ${turno.id}</p>
-            <p>DNI: ${turno.dni}</p>
-            <p>Fecha Ingreso: ${turno.fechaIngreso}</p>
-            <p>Domicilio: ${turno.domicilioDTO.calle}</p> 
+            <h3>${turno.paciente} y ${turno.odontologo} </h3>
+            <p>ID Turno: ${turno.id}</p>
+            <p>Fecha: ${turno.fechaTurno}</p>
             <div class="edit-delete">
                 <button type="submit" class="delete" id="${turno.id}">Eliminar Turno</button>
                 <button type="submit" class="update" id="${turno.id}">Modificar Turno</button>
-            </div>   
+            </div>               
         `
         eliminarTurnos();
         renderizarTurnoAModificar();
@@ -196,18 +192,16 @@ window.addEventListener('load', function(){
 
         const usuario = 
         {   
-            "id":id_turno_form.value,
-            "nombre": nombre.value,
-            "apellido": apellido.value,
-            "dni": dni.value,
-            "fechaIngreso": fecha_ingreso.value,
-            "domicilio":{
-                "calle": calle_domicilio.value,
-                "numero": nro_domicilio.value,
-                "localidad": localidad_domiclio.value,
-                "provincia": prov_domicilio.value
-            }
+            "id": id_turno_form.value,
+            "paciente":{
+                "id": idPacienteTurno.value
+            },
+            "odontologo":{
+                "id": idOdontologoTurno.value
+            },
+            "fechaTurno": fechaHora.value
         }
+
 
         const settingsAgregar = {
             method: "POST",
@@ -233,7 +227,7 @@ window.addEventListener('load', function(){
             modificarTurno(settingsModificar)
         }
 
-        formAddEstudiiante.reset();
+        formAddTurno.reset();
 
     });
 
@@ -293,27 +287,21 @@ window.addEventListener('load', function(){
                     const turnoAModificar = 
                     {   
                         "id": data.id,
-                        "nombre": data.nombre,
-                        "apellido": data.apellido,
-                        "dni": data.dni,
-                        "fechaIngreso": data.fechaIngreso,
-                        "domicilio":{
-                            "calle": data.domicilioDTO.calle,
-                            "numero": data.domicilioDTO.numero,
-                            "localidad": data.domicilioDTO.localidad,
-                            "provincia": data.domicilioDTO.provincia
-                        }
+                        "paciente":{
+                            "id": data.paciente
+                        },
+                        "odontologo":{
+                            "id": data.odontologo
+                        },
+                        "fechaTurno": fechaHora.value
                     };
 
+                    console.log(turnoAModificar)
+
                     id_turno_form.value = turnoAModificar.id;
-                    nombre.value = turnoAModificar.nombre;
-                    apellido.value = turnoAModificar.apellido;
-                    dni.value = turnoAModificar.dni;
-                    fecha_ingreso.value = turnoAModificar.fechaIngreso;
-                    calle_domicilio.value = turnoAModificar.domicilio.calle;
-                    nro_domicilio.value = turnoAModificar.domicilio.numero;
-                    localidad_domiclio.value = turnoAModificar.domicilio.localidad;
-                    prov_domicilio.value = turnoAModificar.domicilio.provincia;
+                    idPacienteTurno.value = turnoAModificar.paciente.id;
+                    idOdontologoTurno.value = turnoAModificar.odontologo.id;
+                    fechaHora.value = turnoAModificar.fechaTurno;
 
                 })
                 .catch(e => {

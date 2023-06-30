@@ -76,13 +76,20 @@ public class TurnoService implements ITurnoService {
     public TurnoDTO modificarTurno(Turno turno) throws ResourceNotFoundException{
 
         Turno turnoAActualizar = turnoRepository.findById(turno.getId()).orElse(null);
-        TurnoDTO turnoDtoActualizado = null;
 
+        TurnoDTO turnoDtoActualizado = null;
 
         if(turnoAActualizar != null){
             turnoAActualizar = turno;
+            OdontologoDTO odontologoDto = odontologoService.buscarOdonotologo(turno.getOdontologo().getId());
+            PacienteDTO pacienteDto = pacienteService.buscarPaciente(turno.getPaciente().getId());
+            Odontologo odontologo = objectMapper.convertValue(odontologoDto, Odontologo.class);
+            Paciente paciente = objectMapper.convertValue(pacienteDto, Paciente.class);
+            turnoAActualizar.setOdontologo(odontologo);
+            turnoAActualizar.setPaciente(paciente);
             turnoRepository.save(turnoAActualizar);
             turnoDtoActualizado = TurnoDTO.fromTurno(turnoAActualizar);
+            LOGGER.info("dto" + turnoDtoActualizado);
             LOGGER.info("Turno modificado con exito: {}", turnoAActualizar);
         }else{
             LOGGER.info("No fue posible actualizar, ya que no existe el turno");

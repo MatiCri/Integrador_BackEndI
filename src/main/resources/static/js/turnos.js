@@ -286,16 +286,17 @@ window.addEventListener('load', function(){
                 .then(data =>{
                     const turnoAModificar = 
                     {   
-                        "id": id_turno_form.value,
+                        "id": data.id,
                         "paciente":{
-                            "id": idPacienteTurno.value
+                            "id": data.paciente
                         },
                         "odontologo":{
-                            "id": idOdontologoTurno.value
+                            "id": data.odontologo
                         },
-                        "fechaTurno": fechaHora.value
+                        "fechaTurno": data.fechaTurno
                     };
 
+                    console.log(turnoAModificar)
 
                     id_turno_form.value = turnoAModificar.id;
                     idPacienteTurno.value = turnoAModificar.paciente.id;
@@ -343,17 +344,5 @@ window.addEventListener('load', function(){
         });
 
     };
-
-
-
-
-
-
-
-
-
-
-
-
 
 });
